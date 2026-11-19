@@ -1,0 +1,13 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("log.csv")
+fig, ax = plt.subplots(figsize=(9, 4))
+ax.plot(df.time_s, df.temp_C, label="Temperature (°C)")
+ax.plot(df.time_s, df.speed_pct, label="Speed (%)")
+ax.axhline(60, ls="--", color="orange", label="Derate limit")
+ax.axhline(75, ls="--", color="red", label="Cut-off limit")
+ax.set_xlabel("Time (s)"); ax.legend(); ax.grid(alpha=0.3)
+plt.title("Temperature-based derating (simulated)")
+plt.savefig("results.png", dpi=150)
+plt.show()
